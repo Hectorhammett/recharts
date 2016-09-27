@@ -18,7 +18,7 @@ class Dot extends Component {
   };
 
   render() {
-    const { cx, cy, r, className } = this.props;
+    const { cx, cy, r, className, labelData, value } = this.props;
     const layerClass = classNames('recharts-dot', className);
 
     if (cx === +cx && cy === +cy && r === +r) {
@@ -29,6 +29,10 @@ class Dot extends Component {
           cx={cx}
           cy={cy}
           r={r}
+          onClick={() => {
+            if(typeof this.props.onClick == 'function')
+              this.props.onClick(labelData,value);
+          }}
         />
       );
     }

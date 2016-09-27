@@ -114,7 +114,7 @@ export default React.createClass({
         <p>LineChart with two y-axes</p>
         <div className='line-chart-wrapper' style={{ padding: 40 }}>
           <LineChart width={400} height={400} data={data}
-            margin={{top: 10, bottom: 10, left: 30, right: 30}}>
+            margin={{top: 10, bottom: 10, left: 30, right: 30}} onDotClick={(ld,v) => {alert("ld: " + ld + ", v: " + v)}}>
             <XAxis dataKey='name'/>
             <Tooltip/>
             <CartesianGrid stroke='#f5f5f5'/>
