@@ -236,7 +236,7 @@ var LineChart = (0, _AnimationDecorator2.default)(_class = (0, _PureRender2.defa
             cx: activePoint.x, cy: activePoint.y,
             labelData: activePoint.labelData,
             value: activePoint.value,
-            r: 4,
+            r: 8,
             fill: stroke, strokeWidth: 2, stroke: '#fff',
             onClick: onClick
           }, (0, _ReactUtils.getPresentationAttributes)(activeDot));
