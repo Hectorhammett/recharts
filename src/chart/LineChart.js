@@ -157,7 +157,7 @@ class LineChart extends Component {
           cx: activePoint.x, cy: activePoint.y,
           labelData: activePoint.labelData,
           value: activePoint.value,
-          r: 4,
+          r: 8,
           fill: stroke, strokeWidth: 2, stroke: '#fff',
           onClick,
           ...getPresentationAttributes(activeDot),
