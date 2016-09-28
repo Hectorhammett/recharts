@@ -34,6 +34,7 @@ class LineChart extends Component {
     yAxisMap: PropTypes.object,
     offset: PropTypes.object,
     graphicalItems: PropTypes.array,
+    onDotClick: PropTypes.func,
     children: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.node),
       PropTypes.node,
@@ -59,14 +60,13 @@ class LineChart extends Component {
 
     return data.map((entry, index) => {
       const value = entry[dataKey];
-      
-      const labelData = (xAxis.dataKey != undefined) ? entry[xAxis.dataKey] : index;
+      const labelData = (xAxis.dataKey !== undefined) ? entry[xAxis.dataKey] : index;
       if (layout === 'horizontal') {
         return {
           x: xTicks[index].coordinate + bandSize / 2,
           y: _.isNil(value) ? null : yAxis.scale(value),
           value,
-          labelData
+          labelData,
         };
       }
 
@@ -74,7 +74,7 @@ class LineChart extends Component {
         x: _.isNil(value) ? null : xAxis.scale(value),
         y: yTicks[index].coordinate + bandSize / 2,
         value,
-        labelData
+        labelData,
       };
     });
   }
@@ -150,12 +150,14 @@ class LineChart extends Component {
       const { xAxisId, yAxisId, dataKey, stroke, activeDot } = child.props;
       const points = this.getComposedData(xAxisMap[xAxisId], yAxisMap[yAxisId], dataKey);
       const activePoint = points[activeTooltipIndex];
-      
       if (hasDot && activeDot && activePoint) {
         const dotProps = {
           index: i,
           dataKey,
-          cx: activePoint.x, cy: activePoint.y,labelData: activePoint.labelData, value: activePoint.value, r: 4,
+          cx: activePoint.x, cy: activePoint.y,
+          labelData: activePoint.labelData,
+          value: activePoint.value,
+          r: 4,
           fill: stroke, strokeWidth: 2, stroke: '#fff',
           onClick,
           ...getPresentationAttributes(activeDot),
@@ -182,7 +184,6 @@ class LineChart extends Component {
 
   render() {
     const { isComposed, xAxisMap, yAxisMap, offset, graphicalItems } = this.props;
-    
     return (
       <Layer className="recharts-line-graphical">
         {!isComposed && this.renderCursor(xAxisMap, yAxisMap, offset)}

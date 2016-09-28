@@ -15,6 +15,9 @@ class Dot extends Component {
     cx: PropTypes.number,
     cy: PropTypes.number,
     r: PropTypes.number,
+    labelData: PropTypes.string,
+    value: PropTypes.number,
+    onClick: PropTypes.func,
   };
 
   render() {
@@ -30,8 +33,7 @@ class Dot extends Component {
           cy={cy}
           r={r}
           onClick={() => {
-            if(typeof this.props.onClick == 'function')
-              this.props.onClick(labelData,value);
+            this.props.onClick(labelData, value);
           }}
         />
       );
